@@ -31,5 +31,3 @@ def get_card_info(card_name, game_format):
     
     result =  f"{card_name} is {banlist_status} in the {game_format} format."
     return result
-
-
