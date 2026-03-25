@@ -18,11 +18,17 @@ def get_card_info(card_name, game_format):
         raise ValueError(error_message)
     
     card_data = card_info["data"][0]
-
+    card_type = card_data["type"]
     if game_format == GameFormat.genesys:
-        misc = card_data["misc_info"][0]
-        point_cost = misc["genesys_points"]
-        result = f"{card_name} costs {point_cost} {"point" if point_cost == 1 else "points"} in the {game_format.value} format."
+        
+        if "Pendulum" in card_type or "Link" in card_type:
+                result = f"{card_name} is not legal in the {game_format.value} format."
+        else:
+            misc = card_data["misc_info"][0]
+            point_cost = misc["genesys_points"]
+            result = f"{card_name} costs {point_cost} {"point" if point_cost == 1 else "points"} in the {game_format.value} format."
+
+        
         return result
     if "banlist_info" not in card_data:
         banlist_status = "not banned"
