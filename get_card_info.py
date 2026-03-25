@@ -4,21 +4,27 @@ import json
 from constants_and_enums import BASE_URL, GameFormat
 
 def get_card_info(card_name, game_format):
+    if game_format is None:
+        return "Unsupported format. Choose TCG, OCG, Goat or Genesys."
     parameters = {"name": card_name,
     "misc": "yes",
     "format": game_format.value}
     
     response = requests.get(BASE_URL, parameters)
-    response.raise_for_status()
+    
+    
     card_info = json.loads(response.text)
     
     
     if "error" in card_info:
         error_message = card_info["error"]
-        raise ValueError(error_message)
+        return error_message
     
     card_data = card_info["data"][0]
     card_type = card_data["type"]
+
+
+
     if game_format == GameFormat.genesys:
         
         if "Pendulum" in card_type or "Link" in card_type:
