@@ -5,3 +5,7 @@ class GameFormat(Enum):
     tcg = "tcg"
     ocg = "ocg"
     goat = "goat"
+    genesys = "genesys"
+    master_duel = "master duel"
+    duel_links = "duel links"
+    ocg_goat = "ocg goat"

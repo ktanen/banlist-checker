@@ -17,13 +17,15 @@ def main():
             game_format = GameFormat.ocg
         case "goat":
             game_format = GameFormat.goat
+        case "genesys":
+            game_format = GameFormat.genesys
         case _:
-            raise ValueError("Unsupported format name: Choose tcg, ocg, or goat")
+            raise ValueError("Unsupported format name: Choose tcg, ocg, goat, or genesys")
     try:
         banlist_status = get_card_info(card_name, game_format)
         print(banlist_status)
     except exceptions.HTTPError as e:
-        print("Invalid card name")
+        print(e)
     except ValueError as e:
         print(e)
 
