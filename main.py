@@ -1,11 +1,23 @@
 import sys
+import argparse
 from constants_and_enums import GameFormat
 from get_card_info import get_card_info
 from requests import exceptions
-def main():
-    if len(sys.argv) != 3:
-        print("Usage: python3 main.py <card name> <format>")
-        sys.exit(1)
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="""A tool to get the banlist status/point cost of a
+    Yu-Gi-Oh! card in the TCG< OCG, Goat, or Genesys format""")
+    parser.add_argument("card name", type=str, help="""The name of the card.
+    Case-insensitive, but must match the name exactly otherwise.
+    Must be in double-quotes if the card name is more than one word long.""")
+    parser.add_argument("format",help="""The format you are looking for.
+    Can be any of TCG, OCG, Goat, or Genesys.
+    Case-insensitive.""")
+    args = parser.parse_args()
+    return args
+
+def main(args):
+
     
     card_name = sys.argv[1]
     game_format_string = sys.argv[2].lower()
@@ -30,5 +42,7 @@ def main():
         print(e)
 
 
+
 if __name__ == "__main__":
-    main()
+    arguments = parse_arguments()
+    main(arguments)
