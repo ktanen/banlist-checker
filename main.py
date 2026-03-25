@@ -10,7 +10,7 @@ def parse_arguments():
     parser.add_argument("card name", type=str, help="""The name of the card.
     Case-insensitive, but must match the name exactly otherwise.
     Must be in double-quotes if the card name is more than one word long.""")
-    parser.add_argument("format",help="""The format you are looking for.
+    parser.add_argument("format", type=str, help="""The format you are looking for.
     Can be any of TCG, OCG, Goat, or Genesys.
     Case-insensitive.""")
     args = parser.parse_args()
